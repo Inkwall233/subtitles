@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>旁白同步提词器</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="control-panel" aria-label="控制面板">
+        <div class="brand-row">
+          <div>
+            <h1>旁白同步提词器</h1>
+            <p id="statusText">准备就绪</p>
+          </div>
+          <div class="timer" aria-live="polite">
+            <span id="elapsedTime">00:00.0</span>
+            <span>/</span>
+            <span id="totalTime">02:00.0</span>
+          </div>
+        </div>
+
+        <label class="field">
+          <span>文案</span>
+          <textarea id="scriptInput" spellcheck="false">这是第一句旁白。这里可以放入你们要一起朗读的文案。
+颜色会按设定时长从左到右推进。
+两个人打开同一个同步链接，就能跟着同一个节奏读。</textarea>
+        </label>
+
+        <div class="settings-grid">
+          <label class="field">
+            <span>总时长</span>
+            <div class="time-inputs">
+              <input id="minutesInput" type="number" min="0" max="999" value="2" aria-label="分钟" />
+              <b>分</b>
+              <input id="secondsInput" type="number" min="0" max="59" value="0" aria-label="秒" />
+              <b>秒</b>
+            </div>
+          </label>
+
+          <label class="field">
+            <span>同步延迟</span>
+            <select id="delayInput">
+              <option value="5">5 秒</option>
+              <option value="10" selected>10 秒</option>
+              <option value="20">20 秒</option>
+              <option value="30">30 秒</option>
+              <option value="60">60 秒</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>推进粒度</span>
+            <select id="modeInput">
+              <option value="char" selected>按字</option>
+              <option value="word">按词</option>
+              <option value="line">按行</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>字号</span>
+            <input id="fontSizeInput" type="range" min="24" max="72" value="42" />
+          </label>
+        </div>
+
+        <div class="button-row">
+          <button id="startButton" class="primary" type="button">开始</button>
+          <button id="pauseButton" type="button">暂停</button>
+          <button id="resetButton" type="button">重置</button>
+          <button id="linkButton" type="button">生成同步链接</button>
+        </div>
+
+        <div id="shareBox" class="share-box" hidden>
+          <input id="shareLink" type="text" readonly aria-label="同步链接" />
+          <button id="copyButton" type="button">复制</button>
+        </div>
+      </section>
+
+      <section class="reader-panel" aria-label="朗读区域">
+        <div class="progress-track" aria-hidden="true">
+          <div id="progressBar"></div>
+        </div>
+        <article id="readerText" class="reader-text"></article>
+        <div id="countdown" class="countdown" hidden></div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
