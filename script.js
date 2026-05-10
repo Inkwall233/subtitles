@@ -23,7 +23,7 @@ const elements = {
 const state = {
   tokens: [],
   tokenElements: [],
-  durationMs: 120000,
+  durationMs: 35000,
   startedAt: 0,
   pausedAt: 0,
   elapsedBeforePause: 0,
